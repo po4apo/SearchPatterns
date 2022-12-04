@@ -1,0 +1,4 @@
+currencies: ["USDRUB","EURUSD"]
+api_keys:
+  - "aNC-0UihHYpVndUWflBe"
+log_level: 0
