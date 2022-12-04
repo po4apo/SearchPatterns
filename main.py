@@ -21,6 +21,11 @@ class Interval(Enum):
 
 
 class Config:
+    """
+    Класс предоставляет доступ к конфигурационному файлу.
+    При помощи метода _load_config программа получает доступ
+    к файлу и конвертирует его в словарь.
+    """
     def __init__(self, path):
         self._logger = logging.getLogger('config')
         self.path = path
@@ -35,6 +40,13 @@ class Config:
 
 
 class Exchange:
+    """
+    Класс предоставляет возможность получение данных от биржи.
+    Метод get_data является основным и возвращает словарь json-файлов,
+    где ключ является валютой.
+    _build_query - приватный метод необходимый для генерации запросов
+    в зависимости от параметров.
+    """
     def __init__(self, exchange_config):
         self._logger = logging.getLogger('exchange')
         self.exchange_config = exchange_config
@@ -76,6 +88,13 @@ class Exchange:
 
 
 class Analyzer:
+    """
+    Основной класс программы нужен для анализа полученных с биржи данных.
+    В gen_results полученные сырые данные распаковываются и предаются в метод
+    search_pattern в нем при помощи библиотеки TA-lib происходит поиск свечных паттернов.
+    После нахождение паттернов для полученных данных выполняется функция clear_data, она
+    как понятно из называния возыварщает ощиченные от пустых полей данные.
+    """
     def __init__(self):
         self._logger = logging.getLogger('analyzer')
         self.bearish = "Нисходящий тренд"
@@ -139,6 +158,12 @@ class Analyzer:
 
 if __name__ == '__main__':
     def run_parser(interval: Interval):
+        """
+        Функция объединяет в себе все классы и нужна для работы скрипта в многопоточном режиме.
+        Так же с её помощью реализовано ожидание обновления.
+        :param interval:
+        :return:
+        """
         config = Config(PurePath('./config.yaml')).config
         logging.basicConfig(level=config['log_level'])
         main_logger = logging.getLogger('runner')
