@@ -148,7 +148,7 @@ class Analyzer:
 
         for name in self.candle_names:
             col = list(candle_patterns_sr[name])
-            if 'Нисходящий тренд' in col or 'Восходящий тренд' in col:
+            if self.bearish in col or self.bullish in col:
                 continue
             else:
                 candle_patterns_sr.pop(name)
