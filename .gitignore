@@ -1,2 +1,4 @@
 ./venv
+./mocks.py
+./TA_lib*
 
