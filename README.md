@@ -13,5 +13,5 @@ Execute `python3.9 -m pip install /*downloaded file name*\`
 
 ### Running
 For running script execute command bellow:\
-`python3.9 main.py` for terminal interface
+`python3.9 main.py` for terminal interface\
 `python3.9 ./interface/run.py` for graphical interface
